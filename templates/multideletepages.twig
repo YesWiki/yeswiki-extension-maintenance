@@ -1,0 +1,85 @@
+{# # This file is part of the YesWiki Extension maintenance.
+# Authors : see README.md file that was distributed with this source code.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. #}
+
+
+{{ include_javascript('javascripts/vendor/vue/vue.js') }}
+{{ include_javascript('tools/maintenance/javascripts/multideletepages.js',false,true) }}
+{{ include_css('tools/maintenance/styles/multideletepages.css',) }}
+
+<div id="pageAdmin">
+    <div v-if="ready" 
+        class="pull-right btn btn-xs btn-primary" 
+        @click="loadPages" 
+        data-tooltip="toogle" 
+        title="{{ _t('MAINTENANCE_REFRESH_LIST') }}">
+        <i class="fas fa-redo-alt"></i>
+    </div>
+    <div v-if="ready" class="pull-right" style="max-width: 300px;">
+        <input type="text" name="customSelect" ref="customSelect">
+        <div class="btn btn-xs btn-danger" 
+            @click="selectCustom" 
+            data-tooltip="toogle" 
+            title="{{ _t('MAINTENANCE_CUSTOM_SELECT') }}">
+            <i class="fa fa-filter"></i>
+        </div>
+    </div>
+    <h1>{{ _t('MAINTENANCE_TITLE') }}</h1>
+    <div class="clearfix"></div>
+    <div v-if="message.length > 0" v-html="message" :class="messageClass"></div>
+    <div class="pageList" v-if="ready">
+    <div class="titlePageList">{{ _t('MAINTENANCE_NAME') }}</div>
+    <div class="titlePageList">{{ _t('MAINTENANCE_DATE') }}</div>
+    <div class="titlePageList">{{ _t('MAINTENANCE_OWNER') }}</div>
+    <div class="titlePageList">{{ _t('MAINTENANCE_USER') }}</div>
+    <div class="titlePageList"></div>
+    <div class="archive-item archive-item-title">
+        <button 
+            class="btn btn-xs btn-warning btn-wrap"
+            @click="deleteSelectedPages"
+            data-toggle="tooltip"
+            title="{{ _t('MAINTENANCE_DELETE_SELECTION') }}"
+            :disabled="updating">
+        {{ _t('MAINTENANCE_DELETE_SELECTION_SHORT') }}
+        </button>
+    </div>
+    <template v-for="page in pages">
+        <div>
+        <a :href="wiki.url(page.tag)" target="blank" :title="page.tag">
+            <span v-html="page.tag"></span>
+            <i class="fa fa-eye"></i>
+        </a>
+        <a :href="wiki.url(`${page.tag}/iframe`)" target="blank" :title="page.tag">
+            <i class="fas fa-folder"></i>
+        </a>
+        <a :href="wiki.url(`${page.tag}/raw`)" target="blank" :title="page.tag">
+            <i class="far fa-file"></i>
+        </a>
+        </div>
+        <div v-html="page.time"></div>
+        <div v-html="page.owner"></div>
+        <div v-html="page.user"></div>
+        <div>
+            <button 
+                class="btn btn-xs btn-danger" 
+                @click="getDeleteTokenThenDelete(page)" 
+                data-tooltip="toggle" 
+                title="{{ _t('MAINTENANCE_DELETE') }}"
+                :disabled="updating">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+        <div @click="toggleSelectedPage(page.tag)">
+            <input 
+                type="checkbox" 
+                :name="`selectedPageToDelete${page.tag}`" 
+                value="1" 
+                :checked="selectedPagesToDelete.includes(page.tag)">
+            <span></span>
+        </div>
+    </template>
+    <spinner-loader v-if="updating" class="overlay"><spinner-loader>
+    </div>
+    <spinner-loader v-else :height="500"><spinner-loader>
+</div>
