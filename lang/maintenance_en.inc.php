@@ -47,4 +47,20 @@ return [
    // 'MAINTENANCE_DELETE_SELECTION' => 'Supprimer la sélection',
    // 'MAINTENANCE_DELETE_SELECTION_SHORT' => 'Suppr. select.',
    // 'MAINTENANCE_DELETE' => 'Supprimer',
+
+   // bazar repair
+   'BAZ_REPARER' => 'Repair',
+   'BAZ_RENAME' => 'Rename',
+   'BAZ_RENAME_FIELD' => 'Rename a field',
+   'BAZ_RENAME_FIELD_HELP' => "This action gives the availability to rename a field into entries of a form.\n".
+       "This is usefull if the fieldname was changed after an update or modification of a form.\n".
+       "**Warning** : you must change the fieldname into the form **BEFORE** using this current function.",
+   'BAZ_RENAME_FORM' => 'Form',
+   'BAZ_RENAME_NEWNAME' => 'New name',
+   'BAZ_RENAME_OLDNAME' => 'Old name',
+   'BAZ_RENAME_OTHER' => 'Other',
+   'BAZ_RENAMEFIELD_OK' => 'Field successfully renammed<br/>%{entryList}',
+   'BAZ_RENAMEFIELD_TROUBLE' => 'An error occured',
+   'BAZ_RENAMEFIELD_NOTHINGTODO' => 'No field to rename was found',
+
 ];

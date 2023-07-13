@@ -1,6 +1,6 @@
 # Extension maintenance
 
-This extension creates the action `maintenance` and handler `/filescleaning`. 
+This extension creates the action `maintenance`, `multideletepage` and handler `/filescleaning`. 
 
 <div style="text-align:center;">
 

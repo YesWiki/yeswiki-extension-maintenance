@@ -2,7 +2,7 @@
 
  - [English](README.md)
 
-Extension [YesWiki](https://yeswiki.net/) pour avoir l'action `{{multideletepages}}` et l'handler `/filescleaning` (nécessite `doryphore 4.2.4`)
+Extension [YesWiki](https://yeswiki.net/) pour avoir les actions `{{multideletepages}}`, `{{bazarrepair}}` et l'handler `/filescleaning` (nécessite `doryphore 4.2.4`)
 Cette extension est un import de l'extension précédente `multideletepages`.
 
 ## Auteurs

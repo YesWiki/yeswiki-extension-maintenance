@@ -47,4 +47,19 @@ return [
    'MAINTENANCE_DELETE_SELECTION' => 'Supprimer la sélection',
    'MAINTENANCE_DELETE_SELECTION_SHORT' => 'Suppr. select.',
    'MAINTENANCE_DELETE' => 'Supprimer',
+
+   //bazarepair
+   'BAZ_RENAME' => 'Renommer',
+   'BAZ_RENAME_FIELD' => 'Renommer un champ',
+   'BAZ_RENAME_FIELD_HELP' => "Cette action vous permet de renommer un champ dans les fiches d'un formulaire.\n".
+   "Ceci est utile si l'identifiant unique du champ a automatiquement été modifié après une mise à jour ou une modification du formulaire.\n".
+   "**Important** : vous devez changer l'identifiant unique du champ dans le formulaire **AVANT** d'utiliser la présente fonctionnalité.",
+   'BAZ_REPARER' => 'Réparer',
+   'BAZ_RENAME_FORM' => 'Formulaire',
+   'BAZ_RENAME_NEWNAME' => 'Nouveau nom',
+   'BAZ_RENAME_OLDNAME' => 'Ancien nom',
+   'BAZ_RENAME_OTHER' => 'Autre',
+   'BAZ_RENAMEFIELD_OK' => 'Champ renommé avec succés<br/>%{entryList}',
+   'BAZ_RENAMEFIELD_TROUBLE' => 'Une erreur est survenue',
+   'BAZ_RENAMEFIELD_NOTHINGTODO' => 'Aucun champ à renommer n\'a été trouvé',
 ];

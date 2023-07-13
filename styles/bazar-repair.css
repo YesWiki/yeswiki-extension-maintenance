@@ -1,0 +1,56 @@
+/*
+ * Module that define VueJs component to rename a fieldname
+ * 
+ * This file is part of the YesWiki Extension maintenance.
+ *
+ * Authors : see README.md file that was distributed with this source code.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+ 
+.rename-field-app form.form-horizontal {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 1000px){
+  .rename-field-app form.form-horizontal {
+    flex-wrap: wrap;
+  }
+}
+
+.rename-field-app form.form-horizontal > div {
+  max-width: 30%;
+  min-width: 210px;
+  flex-grow: 2;
+}
+.rename-field-app form.form-horizontal > button {
+  flex-grow: 0;
+}
+.rename-field-app form.form-horizontal > div:not(:first-child) {
+  margin-left: 0.5em;
+}
+.rename-field-app form.form-horizontal > div:not(:last-child) {
+  margin-right: 0.5em;
+}
+
+@media (max-width: 801px){
+  .rename-field-app form.form-horizontal {
+    flex-direction: column;
+  }
+  .rename-field-app form.form-horizontal > div {
+    max-width: 100%;
+  }
+  .rename-field-app form.form-horizontal > div:not(:first-child) {
+    margin-left: 0;
+    margin-top: 0.2em;
+  }
+  .rename-field-app form.form-horizontal > div:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 0.2em;
+  }
+}

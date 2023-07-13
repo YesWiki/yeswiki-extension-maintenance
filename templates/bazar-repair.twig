@@ -1,0 +1,95 @@
+{# # This file is part of the YesWiki Extension maintenance.
+# Authors : see README.md file that was distributed with this source code.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code. #}
+
+{% if hasAcl('@admins') and not isWikiHibernated %}
+  {{ include_javascript('javascripts/vendor/vue/vue.js') }}
+  {{ include_javascript('tools/maintenance/javascripts/bazar-rename-field-module.js',false,true) }}
+  {{ include_css('tools/maintenance/styles/bazar-repair.css') }}
+  <div 
+      class="rename-field-app"
+      data-token="{{ csrfToken('main') }}"
+      data-restricted-fieldnames= "{{ restrictedFieldnames|json_encode }}"
+    >
+    <template v-if="ready">
+      <h2>{{ _t('BAZ_RENAME_FIELD') }}</h2>
+      <div class="well">
+        <small>{{ format(_t('BAZ_RENAME_FIELD_HELP'))|raw }}</small>
+      </div>
+      <form action="javascript:undefined" class="form-horizontal">
+        <div class="input-prepend input-append input-group">
+          <span class="add-on input-group-addon">
+            {{ _t('BAZ_RENAME_FORM') }}
+          </span>
+          <select id="bazar-rename-formid" class="form-control input-xxlarge" v-model="selectedFormId">
+            {% for key, form in forms %}
+              <option value="{{ key }}">{{ form.bn_label_nature }} ({{ key }})</option>
+            {% endfor %}
+          </select>
+        </div>
+        {% set varName = 'availableOldNames' %}
+        {% set textTitle = _t('BAZ_RENAME_OLDNAME') %}
+        {% set renameId = 'oldname' %}
+        {% block selectname %}
+          <div>
+            <div class="input-prepend input-append input-group">
+              <span class="add-on input-group-addon">
+                {{ textTitle }}
+              </span>
+              <select 
+                id="bazar-rename-{{ renameId }}" 
+                class="form-control input-xxlarge" 
+                v-model="{{ renameId }}"
+                :disabled="!(selectedFormId in {{ varName }})">
+                <template v-if="selectedFormId in {{ varName }}">
+                  <option v-for="name in {{ varName }}[selectedFormId]" :value="name">
+                    {% block optioname %}{{ "{{ name === \"other\" ? #{_t('BAZ_RENAME_OTHER')|json_encode} : name }}" }}{% endblock %}
+                  </option>
+                </template>
+              </select>
+            </div>
+            <div class="input-prepend input-append input-group"
+              v-if="({{ renameId }} === 'other')">
+              <span class="add-on input-group-addon">
+                {{ _t('BAZ_RENAME_OTHER') }}
+              </span>
+              <input 
+                id="bazar-rename-{{ renameId }}-other" 
+                class="form-control input-xxlarge" 
+                v-model="other{{ renameId }}"
+                :disabled="{{ renameId }} !== 'other'"
+                type="text"
+                :pattern="isAllowed(other{{ renameId }}) ? null : '________'"
+                />
+            </div>
+          </div>
+        {% endblock selectname %}
+        {% set varName = 'availableNewNames' %}
+        {% set textTitle = _t('BAZ_RENAME_NEWNAME') %}
+        {% set renameId = 'newname' %}
+        {{ block('selectname') }}
+        <button class="btn btn-primary" :disabled="!canRename" @click="startRename">
+          {{ _t('BAZ_RENAME') }}
+        </button>
+      </form>
+      <div class="clearfix"></div>
+      <div v-if="displaymessage.length > 0">
+        <template v-if="displaymessage === 'success'">{{ include('@templates/alert-message.twig',{
+          message:_t('BAZ_RENAMEFIELD_OK',{
+              entryList:'<ul><li v-for="id in doneEntries"><a :href="wiki.url(id)" class="newtab">{{ id }}</a></li></ul>'
+            }),
+          type:'success'
+        }) }}</template>
+        <template v-else-if="displaymessage === 'trouble'">{{ include('@templates/alert-message.twig',{message:_t('BAZ_RENAMEFIELD_TROUBLE'),type:'warning'}) }}</template>
+        <template v-else-if="displaymessage === 'nothingtodo'">{{ include('@templates/alert-message.twig',{message:_t('BAZ_RENAMEFIELD_NOTHINGTODO'),type:'info'}) }}</template>
+      </div>
+    </template>
+  </div>
+{% elseif  isWikiHibernated %}
+  {{ include('@templates/alert-message.twig',{type:'danger',message:_t('WIKI_IN_HIBERNATION')}) }}
+{% else %}
+  {{ include('@templates/alert-message.twig',{type:'danger',message:_t('BAZ_NEED_ADMIN_RIGHTS')}) }}
+{% endif %}
+
+<hr>
