@@ -1,6 +1,6 @@
 # Extension maintenance
 
-Cette extension créé les actions `maintenance` et `multideletepages` et l'handler `/filescleaning`. 
+Cette extension créé les actions `bazarrepair` et `multideletepages` et l'handler `/filescleaning`. 
 
 ## Handler `/filescleaning`
 

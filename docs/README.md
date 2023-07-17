@@ -1,6 +1,6 @@
 # Extension maintenance
 
-This extension creates the actions `maintenance`, `multideletepages` and handler `/filescleaning`. 
+This extension creates the actions `bazarrepair`, `multideletepages` and handler `/filescleaning`. 
 
  - [Aide en Français](./fr/README.md)
  - [English help](./en/README.md)
