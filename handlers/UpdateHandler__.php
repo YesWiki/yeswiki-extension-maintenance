@@ -33,7 +33,8 @@ class UpdateHandler__ extends YesWikiHandler
             'ebook',
             'checkaccesslink',
             'fontautoinstall',
-            'multideletepages'
+            'multideletepages',
+            'tabdyn'
         ];
         foreach($foldersToRemove as $folderName){
             if (file_exists("tools/$folderName")){
