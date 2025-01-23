@@ -1,10 +1,10 @@
 # Extension maintenance
 
-Cette extension créé les actions `bazarrepair` et `multideletepages` et l'handler `/filescleaning`. 
+Cette extension crée les actions `bazarrepair` et `multideletepages` et l'handler `/filescleaning`. 
 
 ## Handler `/filescleaning`
 
-Se rendre en tant qu'administrateur, administratice sur une page avec le handler `/filescleaning` ([exemple](?GererDroits/filescleaning ':ignore'))
+Se rendre en tant qu'administrateur, administratrice sur une page avec le handler `/filescleaning` ([exemple](?GererDroits/filescleaning ':ignore'))
 
 <div style="text-align:center;">
 
